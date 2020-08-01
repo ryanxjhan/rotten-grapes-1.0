@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class = container>
+    <div class="jumbotron bg-transparent">
+        <h2>Results for "{{ query }}":</h2>
+    </div>
+    <ul class="list-group">
+    {% for entry in wine_list %}
+        <button type="button" class="list-group-item list-group-item-action">
+            <a class="text-dark" href="{{ url_for('detail', key=entry.id) }}"><p class="lead">{{ entry.title }}</p></a>
+        </button>
+    </ul>
+    {% endfor %}
+    <div class="jumbotron bg-transparent">
+      <h6>Showing results {{ display }} of 129970</h6>
+      <a class="btn btn-dark btn-lg" href="/" role="button">Back</a>
+    </div>
+</div>
+{% endblock %}

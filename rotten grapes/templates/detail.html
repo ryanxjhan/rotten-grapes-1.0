@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Wine Details</title>
+{% endblock %}
+{% block content %}
+<div class="card container">
+    <div class="card-body">
+      <h2 class="card-title">{{ entry.title }}</h2>
+      <h3 class="card-subtitle mb-2 text-muted">Rating: {{ entry.rating }} / 100</h3>
+      <h5 class="card-subtitle mb-2 text-muted">Price: ${{ entry.price }}</h5>
+      <h5 class="card-subtitle mb-2 text-muted">Country / Province: {{ entry.country }} / {{ entry.province }}</h5>
+      <h5 class="card-subtitle mb-2 text-muted">Variety: {{ entry.variety }}</h5>
+      <h5 class="card-subtitle mb-2 text-muted">Winery: {{ entry.winery }}</h5>
+      <p class="card-text">Description: {{ entry.description }}</p>
+    </div>
+</div>
+{% endblock %}

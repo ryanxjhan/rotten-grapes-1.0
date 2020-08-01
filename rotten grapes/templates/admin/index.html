@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block header %}
+    <h1>Admin Dashboard</h1>
+{% endblock %}
+{% block content %}
+<div class = container>
+    <div class="jumbotron bg-transparent">
+    <h2 class="container">Search the Wine Database</h2>
+    <form class="container" action="{{ url_for('results') }}" method="post">
+        <input class="form-control" name="query" type="text" placeholder="Manage your wine database"
+               aria-label="Search">
+    </form>
+    </div>
+    <div class="jumbotron">
+            <button type="button" class="btn btn-dark">Add</button>
+        </div>
+    <ul class="list-group">
+    {% for entry in wine_list.items %}
+        <div class="jumbotron">
+            <a class="text-dark" href="{{ url_for('detail', key=entry.id) }}"><p class="lead">{{ entry.title }}</p></a>
+            <button type="button" class="btn btn-dark">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+    </ul>
+    {% endfor %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            {% if wine_list.has_prev%}
+                <li class="page-item">
+                  <a class="page-link text-dark" href="{{ url_for('admin', page=wine_list.prev_num) }}" tabindex="-1">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link text-dark" href="{{ url_for('admin', page=wine_list.prev_num) }}" tabindex="-1">Previous</a>
+                </li>
+            {% endif %}
+            {% for page in wine_list.iter_pages() %}
+                {% if page == None %}
+                <li class="page-item"><a class="page-link text-dark">...</a></li>
+                {% else %}
+                    {% if page != wine_list.page %}
+                        <li class="page-item"><a class="page-link text-dark" href="{{ url_for('admin', page=page) }}">{{ page }}</a></li>
+                    {% else %}
+                        <li class="page-item active"><a class="page-link text-light" href="{{ url_for('admin', page=page) }}">{{ page }}</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if wine_list.has_next%}
+                <li class="page-item">
+                  <a class="page-link text-dark" href="{{ url_for('admin', page=wine_list.next_num) }}">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link text-dark" href="{{ url_for('admin', page=wine_list.next_num) }}">Next</a>
+                </li>
+            {% endif %}
+
+         </ul>
+    </nav>
+    <div class="jumbotron bg-transparent">
+      <a class="btn btn-dark btn-lg" href="/" role="button">Back</a>
+    </div>
+</div>
+{% endblock %}

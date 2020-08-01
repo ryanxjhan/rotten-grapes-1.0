@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="jumbotron bg-transparent">
+    <h2 class="container">A Local Database of 130,000 Wines.</h2>
+    <form class="container" action="{{ url_for('results') }}" method="post">
+        <input class="form-control" name="query" type="text" placeholder="Find your favourite wine"
+               aria-label="Search">
+    </form>
+</div>
+{% endblock %}
